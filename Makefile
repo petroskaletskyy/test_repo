@@ -16,14 +16,20 @@ amd64:
 arm64:
 	TARGETARCH=arm64	
 
-build-linux: format 
-	CGO_ENABLED=0 GOOS=linux GOARCH=${TARGETARCH} go build
+build: format
+	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build
 
-build-darwin: format 
-	CGO_ENABLED=0 GOOS=darwin GOARCH=${TARGETARCH} go build	
+linux: 
+	TARGETOS=linux
+	make build
 
-build-windows: format 
-	CGO_ENABLED=0 GOOS=windows GOARCH=${TARGETARCH} go build	
+darwin:
+	TARGETOS=darwin
+	make build	
+
+windows: 
+	TARGETOS=windows
+	make build	
 
 push:
 	docker push ${REGISTRY}/${APP}:${TARGETARCH}
