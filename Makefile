@@ -18,15 +18,12 @@ arm64:
 
 build-linux: format 
 	CGO_ENABLED=0 GOOS=linux GOARCH=${TARGETARCH} go build
-	TARGETOS=linux
 
 build-darwin: format 
 	CGO_ENABLED=0 GOOS=darwin GOARCH=${TARGETARCH} go build	
-	TARGETOS=darwin
 
 build-windows: format 
-	CGO_ENABLED=0 GOOS=windows GOARCH=${TARGETARCH} go build
-	TARGETOS=windows	
+	CGO_ENABLED=0 GOOS=windows GOARCH=${TARGETARCH} go build	
 
 push:
 	docker push ${REGISTRY}/${APP}:${TARGETARCH}
